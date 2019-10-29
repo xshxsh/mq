@@ -12,6 +12,7 @@ spring:
     #mq连接池
     pool:
       enabled: true
+      #最大连接数量
       max-connections: 8
       #空闲的连接过期时间，默认为30秒
       idle-timeout: 30000

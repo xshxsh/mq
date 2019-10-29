@@ -1,0 +1,22 @@
+spring:
+  kafka:
+    producer:
+      bootstrap-servers:
+        - 192.168.149.128:9092
+
+#自定义的kafka消费者配置，可以设定批量消费
+kafka:
+  consumer:
+    #偏移量设置：
+    #earliest：当各分区下有已提交的offset时，从提交的offset开始消费；无提交的offset时，从头开始消费
+    #latest：当各分区下有已提交的offset时，从提交的offset开始消费；无提交的offset时，消费新产生的该分区下的数据
+    #none：topic各分区都存在已提交的offset时，从offset后开始消费；只要有一个分区不存在已提交的offset，则抛出异常
+    auto-offset-reset: earliest
+    #服务器地址，存在多个地址则以逗号分隔
+    bootstrap-servers: 192.168.149.128:9092
+    #消费组ID
+    group-id: 'myGroup'
+    #消费主题
+    topic: 'myTopic'
+    #批量拉取的消息数量
+    max-poll-records: 1000
