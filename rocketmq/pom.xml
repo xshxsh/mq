@@ -14,5 +14,15 @@
     <artifactId>rocketmq</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    
+    <dependencies>
+        <!--注意： 这里的版本,要和部署在服务器上的版本号一致-->
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+
+    </dependencies>
+
+
 </project>
