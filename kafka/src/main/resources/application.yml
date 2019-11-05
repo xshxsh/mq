@@ -1,8 +1,22 @@
 spring:
   kafka:
     producer:
+      #服务器地址列表
       bootstrap-servers:
-        - 192.168.149.128:9092
+        - 10.36.10.2:9092
+        - 10.36.10.3:9092
+        - 10.36.10.4:9092
+      #key和value的序列化器
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      #保证生产者不丢失数据，需要服务端返回一个确认码，即ack响应码；ack的响应有三个状态值：
+      # 0：生产者只负责发送数据，不关心数据是否丢失
+      # 1：partition的leader收到数据
+      # -1：所有的follow节点都收到数据
+      acks: 0
+      #生产者在发送失败时的重试次数
+      retries: 0
+
 
 #自定义的kafka消费者配置，可以设定批量消费
 kafka:
@@ -13,10 +27,12 @@ kafka:
     #none：topic各分区都存在已提交的offset时，从offset后开始消费；只要有一个分区不存在已提交的offset，则抛出异常
     auto-offset-reset: earliest
     #服务器地址，存在多个地址则以逗号分隔
-    bootstrap-servers: 192.168.149.128:9092
+    bootstrap-servers: 10.36.10.2:9092,10.36.10.3:9092,10.36.10.4:9092
     #消费组ID
     group-id: 'myGroup'
     #消费主题
     topic: 'myTopic'
     #批量拉取的消息数量
     max-poll-records: 1000
+    # 关闭自动提交，防止消息重复消费或丢失
+    enable-auto-commit: false
